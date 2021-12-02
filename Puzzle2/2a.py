@@ -1,6 +1,10 @@
 import fileHelper
 
-inputList = fileHelper.readInputFile("input2.txt")
+#inputList = fileHelper.readInputFileAsStringList("input2.txt")
+inputStrings = []
+with open("input2.txt",'r') as inputFile:
+    #one line to automatically separate each line into its own entry in the list
+    inputStrings = inputFile.readlines()
 
 depth = 0
 horizontal = 0

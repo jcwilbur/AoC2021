@@ -1,6 +1,6 @@
 import fileHelper
 
-inputList = fileHelper.readInputFile("input2.txt")
+inputList = fileHelper.readInputFileAsStringList("input2.txt")
 
 depth = 0
 horizontal = 0
