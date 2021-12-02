@@ -2,9 +2,7 @@ import fileHelper
 
 inputList = fileHelper.readInputFileAsStringList("Puzzle2/input2.txt")
 
-depth = 0
-horizontal = 0
-aim=0
+depth = horizontal = aim = 0
 
 for step in inputList:
     stepList = step.split(" ")
