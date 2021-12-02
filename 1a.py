@@ -1,24 +1,19 @@
 from os import read
-
+#declare a list to hold raw input
 inputStrings = []
 with open('input.txt','r') as inputFile:
-   # while(inputFile.)
-    #inputList.append(inputFile.readline())
+   #one line to automatically separate each line into its own entry in the list
     inputStrings = inputFile.readlines()
-
-#print(inputList[100])
+      
+#declare a list to hold the values converted to ints
+#TODO: Can I swap the values in-place without copying to a new list?
 inputInts = []
 for stringValue in inputStrings:
     inputInts.append(int(stringValue))
 
-inputGroups = []
-
-
-
 increases = 0
 lastValue = 0
-for currentValue in inputInts:
-   
+for currentValue in inputInts: 
     if(currentValue > lastValue):
         increases = increases +1
     lastValue = currentValue
