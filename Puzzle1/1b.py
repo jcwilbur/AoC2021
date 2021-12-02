@@ -3,7 +3,7 @@ from os import read
 groupSize = 3
 
 inputStrings = []
-with open('input.txt','r') as inputFile:
+with open("Puzzle1/input.txt",'r') as inputFile:
     inputStrings = inputFile.readlines()
 
 inputInts = []

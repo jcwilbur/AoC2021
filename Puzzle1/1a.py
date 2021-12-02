@@ -1,7 +1,7 @@
 from os import read
 #declare a list to hold raw input
 inputStrings = []
-with open('input.txt','r') as inputFile:
+with open('Puzzle1/input.txt','r') as inputFile:
    #one line to automatically separate each line into its own entry in the list
     inputStrings = inputFile.readlines()
       

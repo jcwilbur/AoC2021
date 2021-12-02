@@ -1,10 +1,6 @@
 import fileHelper
 
-#inputList = fileHelper.readInputFileAsStringList("input2.txt")
-inputStrings = []
-with open("input2.txt",'r') as inputFile:
-    #one line to automatically separate each line into its own entry in the list
-    inputStrings = inputFile.readlines()
+inputList = fileHelper.readInputFileAsStringList("Puzzle2/input2.txt")
 
 depth = 0
 horizontal = 0
