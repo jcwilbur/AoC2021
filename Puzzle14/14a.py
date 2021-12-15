@@ -2,9 +2,10 @@ import fileHelper
 inputList = fileHelper.readInputFileAsStringList("Puzzle14/input14.txt")
 startingPolymer = inputList.pop(0).strip()
 pairInsertionRules = inputList[1:]
+lastLetter = startingPolymer[-1]
+numRuns = 40
 
-numRuns = 10
-
+#manually verified to work with input given
 def createPairList(polymerIn):
     pairListOut = {}
     for letterIndex in range(len(polymerIn)-1):
@@ -44,6 +45,23 @@ def doWork(polymerIn,rulesIn):
     mergedDictionary = MergeDictionaries(polymerIn,pairsToAdd)
     return mergedDictionary
 
+def doWork2(polymerIn,rulesIn):
+    pairsToAdd = {}
+
+    for pair in polymerIn:
+        if pair in rulesIn:
+            count = polymerIn[pair]
+            polymerIn[pair] = 0
+            newKey1 = pair[0] + rulesIn[pair]
+            newKey2 = rulesIn[pair] + pair[1]
+            if not newKey1 in pairsToAdd: pairsToAdd[newKey1] = 0
+            if not newKey2 in pairsToAdd: pairsToAdd[newKey2] = 0
+            pairsToAdd[newKey1] += count
+            pairsToAdd[newKey2] += count
+    output = MergeDictionaries(polymerIn,pairsToAdd)
+
+    return output
+
 def MergeDictionaries(target,valuesToMerge):
     output = target
     for key in valuesToMerge:
@@ -51,15 +69,16 @@ def MergeDictionaries(target,valuesToMerge):
         else: output[key] += valuesToMerge[key]
     return output
 
-def CountLetters(pairListIn):
+def CountLetters(pairListIn,lastLetterIn):
     letterCounts = {}
     for key in pairListIn:
         if not key[0] in letterCounts: letterCounts[key[0]] = pairListIn[key]
         else: letterCounts[key[0]] += pairListIn[key]
-        if not key[0] == key[1]:
-            if not key[1] in letterCounts: letterCounts[key[1]] = pairListIn[key]
-            else: letterCounts[key[1]] += pairListIn[key]
     
+    #b/c i'm only counting first letters of pairs, have to manually add the last
+    if not lastLetterIn in letterCounts: letterCounts[lastLetterIn] = 1
+    else: letterCounts[lastLetterIn] += 1
+
     minKey = min(letterCounts,key=letterCounts.get)
     maxKey = max(letterCounts,key=letterCounts.get)
     minVal = letterCounts[minKey]
@@ -68,12 +87,12 @@ def CountLetters(pairListIn):
     print("Max: ", maxKey, " Value: ", maxVal)
     print("Difference of: ", maxVal-minVal)
 
-
 pairList = createPairList(startingPolymer)
 
 pairInsertionRules = createRuleDictionary(pairInsertionRules)
 
 for i in range(numRuns):
     pairList = doWork(pairList, pairInsertionRules)
+    print("run: ",i, "\n",CountLetters(pairList,lastLetter))
 
-CountLetters(pairList)
+
